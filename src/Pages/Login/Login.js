@@ -1,18 +1,32 @@
 import React, { useRef } from 'react';
 import { Button, Form } from 'react-bootstrap';
+import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { Link, useNavigate } from 'react-router-dom';
+
+import auth from '../../firebase.init';
 
 const Login = () => {
     const emailRef = useRef('');
     const passwordRef = useRef('');
     const navigate = useNavigate();
+    const [
+        signInWithEmailAndPassword,
+        user
+
+    ] = useSignInWithEmailAndPassword(auth);
+
+
 
     const handleSubmit = (event) => {
         event.preventDefault();
         const email = emailRef.current.value;
         const password = passwordRef.current.value;
-        console.log(email, password);
+        signInWithEmailAndPassword(email, password);
+        console.log(user);
 
+    }
+    if (user) {
+        navigate('/');
     }
 
     const navigateToRegister = () => {
@@ -20,7 +34,7 @@ const Login = () => {
     }
 
     return (
-        <div className='container mx-auto w-50 '>
+        <div className='container mx-auto w-50'>
             <h2 className='text-center mt-5'>Please Login</h2>
             <Form onSubmit={handleSubmit} >
 

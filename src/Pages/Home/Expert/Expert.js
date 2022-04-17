@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Expert = ({ expert }) => {
-    const { name, img } = expert;
+    const { img } = expert;
     return (
         <div className="col-sm-12 col-md-6 col-lg-4 g-5">
             <div className="card rounded-3" style={{ width: "18rem" }}>
